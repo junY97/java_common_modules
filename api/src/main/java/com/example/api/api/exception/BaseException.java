@@ -12,7 +12,7 @@ abstract class BaseException extends NestedRuntimeException {
     ErrorCode errorCode;
     String debugMessage;
 
-    public BaseException(String debugMessage, ErrorCode errorCode) {
+    public BaseException(ErrorCode errorCode, String debugMessage) {
         super(debugMessage);
         this.errorCode = errorCode;
         this.debugMessage = debugMessage;

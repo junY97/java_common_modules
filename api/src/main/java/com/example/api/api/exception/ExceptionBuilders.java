@@ -8,15 +8,15 @@ import lombok.Getter;
  */
 @Getter
 public class ExceptionBuilders {
-    public static void invalidRequest (String debugMessage,ErrorCode errorCode) throws InvalidRequestException {
-         throw new InvalidRequestException(debugMessage, errorCode);
+    public static void invalidRequest (ErrorCode errorCode, String debugMessage) throws InvalidRequestException {
+         throw new InvalidRequestException(errorCode, debugMessage);
     }
     public static void invalidRequest(ErrorCode errorCode) throws InvalidRequestException  {
         throw new InvalidRequestException(errorCode);
     }
 
-    public static void serverError (String debugMessage,ErrorCode errorCode) throws ServerException  {
-        throw new ServerException(debugMessage, errorCode);
+    public static void serverError (ErrorCode errorCode, String debugMessage) throws ServerException  {
+        throw new ServerException(errorCode, debugMessage);
     }
     public static void serverError (ErrorCode errorCode) throws ServerException {
         throw new ServerException(errorCode);

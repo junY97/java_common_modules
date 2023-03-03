@@ -10,13 +10,13 @@ import lombok.Getter;
 public class ServerException extends BaseException{
     String debugMessage;
     ErrorCode errorCode;
-    public ServerException(String debugMessage, ErrorCode errorCode) {
-        super(debugMessage, errorCode);
-        this.debugMessage = debugMessage;
+    public ServerException(ErrorCode errorCode, String debugMessage) {
+        super(errorCode, debugMessage);
         this.errorCode = errorCode;
+        this.debugMessage = debugMessage;
     }
     public ServerException(ErrorCode errorCode) {
-        super("", errorCode);
+        super(errorCode, "");
         this.errorCode = errorCode;
     }
 }

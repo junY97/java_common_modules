@@ -10,13 +10,13 @@ import lombok.Getter;
 public class InvalidRequestException extends BaseException {
     String debugMessage;
     ErrorCode errorCode;
-    public InvalidRequestException(String debugMessage, ErrorCode errorCode) {
-        super(debugMessage, errorCode);
-        this.debugMessage = debugMessage;
+    public InvalidRequestException(ErrorCode errorCode, String debugMessage) {
+        super(errorCode, debugMessage);
         this.errorCode = errorCode;
+        this.debugMessage = debugMessage;
     }
     public InvalidRequestException(ErrorCode errorCode) {
-        super("", errorCode);
+        super(errorCode, "");
         this.errorCode = errorCode;
     }
 }
