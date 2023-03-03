@@ -34,7 +34,7 @@ public class ExceptionController {
 
     /**
      * Server Exception
-     * Error Status (500)
+     * Error Status (5xx)
      */
     @ExceptionHandler({ServerException.class})
     protected ResponseEntity<ErrorResponse> customExceptionHandler (ServerException e) {
