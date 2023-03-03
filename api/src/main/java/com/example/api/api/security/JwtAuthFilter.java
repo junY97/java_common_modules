@@ -1,6 +1,7 @@
 package com.example.api.api.security;
 
 import com.example.api.api.exception.ErrorCode;
+import com.example.api.api.exception.ExceptionController;
 import com.example.api.api.exception.InvalidRequestException;
 import com.example.api.api.http.response.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,9 +21,10 @@ import java.io.IOException;
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final ObjectMapper objectMapper;
-
-    public JwtAuthFilter(ObjectMapper objectMapper) {
+    private final ExceptionController exceptionController;
+    public JwtAuthFilter(ObjectMapper objectMapper, ExceptionController exceptionController) {
         this.objectMapper = objectMapper;
+        this.exceptionController = exceptionController;
     }
 
     @Override
@@ -43,13 +45,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         } catch (InvalidRequestException e) {
-            logger.error(e.getDebugMessage());
             ErrorResponse errorResponse = new ErrorResponse(
                     ErrorCode.INTERNAL_SERVER_ERROR,
                     e.getMessage(),
                     ErrorCode.INTERNAL_SERVER_ERROR.getCode()
             );
-            response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(objectMapper.writeValueAsString(exceptionController.customExceptionHandler(e)));
         }
     }
 //    @Override
