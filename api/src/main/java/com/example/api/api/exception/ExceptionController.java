@@ -1,13 +1,11 @@
 package com.example.api.api.exception;
 
 import com.example.api.api.http.response.ErrorResponse;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static com.example.api.api.exception.ErrorCode.INTERNAL_SERVER_ERROR;
 
@@ -24,12 +22,13 @@ public class ExceptionController {
      * Error Status (4xx)
      */
     @ExceptionHandler({InvalidRequestException.class})
-    public ErrorResponse customExceptionHandler (InvalidRequestException e) {
+
+    public ResponseEntity<ErrorResponse> customExceptionHandler (InvalidRequestException e) {
         logger.error(String.valueOf(e));
 
         ErrorCode errorCode = e.getErrorCode();
-
-        return new ErrorResponse(errorCode, e.debugMessage, errorCode.getCode());
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.debugMessage, errorCode.getCode());
+        return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
 
@@ -38,13 +37,12 @@ public class ExceptionController {
      * Error Status (500)
      */
     @ExceptionHandler({ServerException.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected ErrorResponse customExceptionHandler (ServerException e) {
+    protected ResponseEntity<ErrorResponse> customExceptionHandler (ServerException e) {
         logger.error(String.valueOf(e));
 
         ErrorCode errorCode = e.getErrorCode();
-
-        return new ErrorResponse(errorCode, e.debugMessage, errorCode.getCode());
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.debugMessage, errorCode.getCode());
+        return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
     /**
@@ -52,12 +50,11 @@ public class ExceptionController {
      * Error Status (500)
      */
     @ExceptionHandler({Exception.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected ErrorResponse customExceptionHandler (Exception e) {
+    protected ResponseEntity<ErrorResponse> customExceptionHandler (Exception e) {
         logger.error(String.valueOf(e));
 
         ErrorCode errorCode = INTERNAL_SERVER_ERROR;
-
-        return new ErrorResponse(errorCode, e.getMessage(), errorCode.getCode());
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.getMessage(), errorCode.getCode());
+        return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 }

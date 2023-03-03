@@ -1,22 +1,24 @@
 package com.example.api.api.exception;
 
+import lombok.Getter;
+
 /**
  * @author junyeong.jo .
  * @since 2023-03-03
  */
-
+@Getter
 public class ExceptionBuilders {
-    public void invalidRequest (String debugMessage,ErrorCode errorCode) {
-        throw new InvalidRequestException(debugMessage, errorCode);
+    public static void invalidRequest (String debugMessage,ErrorCode errorCode) throws InvalidRequestException {
+         throw new InvalidRequestException(debugMessage, errorCode);
     }
-    public void invalidRequest (ErrorCode errorCode) {
+    public static void invalidRequest(ErrorCode errorCode) throws InvalidRequestException  {
         throw new InvalidRequestException(errorCode);
     }
 
-    public void serverError (String debugMessage,ErrorCode errorCode) {
+    public static void serverError (String debugMessage,ErrorCode errorCode) throws ServerException  {
         throw new ServerException(debugMessage, errorCode);
     }
-    public void serverError (ErrorCode errorCode) {
+    public static void serverError (ErrorCode errorCode) throws ServerException {
         throw new ServerException(errorCode);
     }
 }
