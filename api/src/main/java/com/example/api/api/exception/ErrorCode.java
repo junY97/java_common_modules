@@ -13,10 +13,10 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
     // 400 BAD_REQUEST
-    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "파라미터를 확인해주세요", HttpStatus.BAD_REQUEST.value()),
+    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "파라미터를 확인해주세요", 400),
 
     // 500 INTERNAL_SERVER_ERROR
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 에러입니다.", HttpStatus.INTERNAL_SERVER_ERROR.value());
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,"서버 에러입니다.", 500);
 
     private final HttpStatus httpStatus;
     private final String message;

@@ -39,17 +39,4 @@ public class ErrorResponse {
         this.errorCode = errorCode;
     }
 
-    /**
-     Constructs an error response object.
-     @param error error code and message of the error.
-     @param errorCode error code of the error.
-     */
-    public ErrorResponse(ErrorCode error, int errorCode) {
-        this.errorStatus = error.getHttpStatus();
-        this.interfaceMessage = error.getMessage();
-        this.success = false;
-        this.responseTime = LocalDateTime.now();
-        this.debugMessage = "";
-        this.errorCode = errorCode;
-    }
 }

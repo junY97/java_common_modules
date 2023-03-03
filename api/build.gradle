@@ -14,8 +14,9 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.security:spring-security-aspects:6.0.2'
 	implementation 'org.springframework.security:spring-security-web:6.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
 	compileOnly 'org.projectlombok:lombok:1.18.26'
 	annotationProcessor 'org.projectlombok:lombok:1.18.26'
 	testCompileOnly 'org.projectlombok:lombok:1.18.26'
