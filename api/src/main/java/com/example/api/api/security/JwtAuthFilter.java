@@ -45,6 +45,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         } catch (InvalidRequestException e) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(objectMapper.writeValueAsString(exceptionController.customExceptionHandler(e)));
+        } catch (Exception e) {
             ErrorResponse errorResponse = new ErrorResponse(
                     ErrorCode.INTERNAL_SERVER_ERROR,
                     e.getMessage(),
@@ -52,7 +56,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             );
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(exceptionController.customExceptionHandler(e)));
+            response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
         }
     }
 //    @Override
