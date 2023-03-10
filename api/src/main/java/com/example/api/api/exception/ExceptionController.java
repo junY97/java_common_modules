@@ -27,7 +27,7 @@ public class ExceptionController {
         logger.error(String.valueOf(e));
 
         ErrorCode errorCode = e.getErrorCode();
-        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.debugMessage, errorCode.getCode());
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.debugMessage);
         return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
@@ -41,7 +41,7 @@ public class ExceptionController {
         logger.error(String.valueOf(e));
 
         ErrorCode errorCode = e.getErrorCode();
-        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.debugMessage, errorCode.getCode());
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.debugMessage);
         return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
@@ -54,7 +54,7 @@ public class ExceptionController {
         logger.error(String.valueOf(e));
 
         ErrorCode errorCode = INTERNAL_SERVER_ERROR;
-        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.getMessage(), errorCode.getCode());
+        ErrorResponse errorResponse = new ErrorResponse(errorCode, e.getMessage());
         return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 }

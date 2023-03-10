@@ -28,15 +28,13 @@ public class ErrorResponse {
      Constructs an error response object.
      @param error error code and message of the error.
      @param debugMessage debug message for the error.
-     @param errorCode error code of the error.
      */
-    public ErrorResponse(ErrorCode error, String debugMessage, int errorCode) {
+    public ErrorResponse(ErrorCode error, String debugMessage) {
         this.errorStatus = error.getHttpStatus();
         this.interfaceMessage = error.getMessage();
         this.success = false;
         this.responseTime = LocalDateTime.now();
         this.debugMessage = debugMessage;
-        this.errorCode = errorCode;
+        this.errorCode = error.getCode();
     }
-
 }
