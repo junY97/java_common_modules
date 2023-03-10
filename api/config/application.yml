@@ -1,0 +1,8 @@
+# This config file is just sample. All config files should not be uploaded to GitHub.
+
+#jwt Secret Key & Valid Time
+jwt:
+  accessTokenSecret: "apple"
+  refreshTokenSecret: "pineapple"
+  accessTokenValidTime: 1800000 # 30 min
+  refreshTokenValidTime: 10800000 # 3 hour
